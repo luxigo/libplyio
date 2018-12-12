@@ -1,0 +1,18 @@
+ply
+format ascii 1.0
+element vertex 4
+property double x
+property double y
+property double z
+property double nx
+property double ny
+property double nz
+property uchar red
+property uchar green
+property uchar blue
+element face 0
+end_header
+2497750.8 1117970.45 421.98 1 2 3 4 5 6
+2497752.4 1117970.61 421.94 1 2 3 4 5 6
+2497753.23 1117971.41 421.92 1 2 3 4 5 6
+2497752.36 1117972.21 421.95 1 2 3 4 5 6

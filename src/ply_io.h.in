@@ -1,0 +1,61 @@
+/*
+* Author(s):
+*
+*      Luc Deschenaux <luc.deschenaux@freesurf.ch>
+*
+* This software is in the public domain. Where that dedication is not
+* recognized, you are granted a perpetual, irrevocable license to copy,
+* distribute, and modify this file as you see fit. If these terms are
+* not suitable to your organization, you may choose to license it
+* under the terms of the 2-clause simplified BSD.
+*
+*/
+
+#ifndef __PLY_IO__
+#define __PLY_IO__
+
+#define plyio_VERSION_MAJOR @plyio_VERSION_MAJOR@
+#define plyio_VERSION_MINOR @plyio_VERSION_MINOR@
+#define plyio_VERSION_PATCH @plyio_VERSION_PATCH@
+#define plyio_GIT_BRANCH @plyio_GIT_BRANCH@
+#define plyio_GIT_COMMIT @plyio_GIT_COMMIT@
+
+#include <vector>
+#include <utility>
+#include "tinyply.h"
+
+class RequestedProperties {
+public:
+  size_t remaining;
+  std::string elementName;
+  std::shared_ptr<tinyply::PlyData> *tinyPlyDataPtr;
+  std::vector<std::pair<std::string, bool> > properties;
+  RequestedProperties(std::shared_ptr<tinyply::PlyData> *tinyPlyDataPtr, std::string elementName, std::initializer_list<std::string>properties_list);
+  RequestedProperties(std::shared_ptr<tinyply::PlyData> *tinyPlyDataPtr, std::string elementName, std::vector<std::string>properties_list);
+};
+
+
+/**
+  read a ply file using tinyply
+  @param filename the ply file name
+  @param requestedProperties what to extract and where to store the pointers
+  @param requestOtherProperties must be true when output file is the input file
+  @param verbose
+  @return status
+*/
+int ply_read(
+  const char *filename,
+  tinyply::PlyFile &file,
+  std::vector<RequestedProperties> &requestedPropertiesList,
+  std::vector<std::shared_ptr<tinyply::PlyData>> &other_properties,
+  int verbose=0
+);
+
+int ply_read(
+  const char *filename,
+  tinyply::PlyFile &file,
+  std::vector<RequestedProperties> &requestedPropertiesList,
+  int verbose=0
+);
+
+#endif
